@@ -1,0 +1,7 @@
+[package]
+name = "analyze-vcd"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+wellen = "0.13.6"
