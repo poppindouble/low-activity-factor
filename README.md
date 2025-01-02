@@ -2,6 +2,7 @@
 
 ## Run
 
-```
-$ cargo run --example test
+```sh
+# Extract activity factor
+$ cargo run --example activity_factor
 ```
