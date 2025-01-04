@@ -10,7 +10,7 @@ fn main() {
     let args: Vec<String> = env::args().collect();
     let config_name = &args[1];
     let benchmark = &args[2];
-    let dir = "./waveforms/".to_string() + config_name + "/" + benchmark + ".vcd";
+    let dir = "./waveforms/".to_string() + config_name + "/" + benchmark;
     println!(
         "Design name {}, benchmark name {}",
         config_name.to_string(),
