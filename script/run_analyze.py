@@ -19,7 +19,7 @@ def append_to_file(data_iterable, file_path):
 
 
 waveform_dir = os.getcwd() + "/waveforms/"
-design_names = os.listdir(waveform_dir)
+design_names = [name for name in os.listdir(waveform_dir) if name != ".DS_Store"]
 
 result_path = os.path.join(waveform_dir, "resutl.txt")
 
