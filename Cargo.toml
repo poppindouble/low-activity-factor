@@ -5,3 +5,4 @@ edition = "2021"
 
 [dependencies]
 wellen = "0.13.6"
+sv-parser = "0.13.3"

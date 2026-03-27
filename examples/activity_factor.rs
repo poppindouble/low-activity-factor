@@ -1,10 +1,21 @@
 use std::env;
 use wellen::*;
+use std::collections::HashSet;
 
 const LOAD_OPTS: LoadOptions = LoadOptions {
     multi_thread: true,
     remove_scopes_with_empty_name: false,
 };
+
+fn has_duplicates<T: Eq + std::hash::Hash>(vec: &[T]) -> bool {
+    let mut seen = HashSet::new();
+    for item in vec {
+        if !seen.insert(item) {
+            return true; // Duplicate found
+        }
+    }
+    false
+}
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -28,12 +39,15 @@ fn main() {
 
     let mut wave_source = body.source;
 
+
     let ids = hierarchy
         .get_unique_signals_vars()
         .iter()
         .flatten()
         .map(|var| var.signal_ref())
         .collect::<Vec<_>>();
+
+    println!("ids has duplicated {}", has_duplicates(&ids));
 
     // Total number of signals
     let ids_len = ids.len();
@@ -54,6 +68,16 @@ fn main() {
         .collect::<Vec<_>>();
 
     println!("Total number of signals {:#?}", ids_len);
+
+    let sig_names = hierarchy.get_unique_signals_vars().iter().flatten().map(|var| {
+        var.full_name(&hierarchy)
+    }).collect::<Vec<_>>();
+
+    println!("sig_names has duplicated {}", has_duplicates(&sig_names));
+
+    for sig_name in &sig_names {
+        println!("{}", sig_name)
+    }
 
     fn average(xs: &[f32]) -> f32 {
         let sum: f32 = xs.iter().sum();
